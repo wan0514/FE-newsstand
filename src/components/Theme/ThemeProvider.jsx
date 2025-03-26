@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
-import { lightTheme } from './themes';
+import { darkTheme, lightTheme } from './themes';
 import { GlobalStyle } from '../../styles/GlobalStyle';
 
-export default function ThemeProvider({ children }) {
+export default function ThemeProvider({ children, isDarkMode }) {
   return (
-    <EmotionThemeProvider theme={lightTheme}>
+    <EmotionThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       {children}
     </EmotionThemeProvider>
