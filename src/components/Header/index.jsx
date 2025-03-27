@@ -28,13 +28,13 @@ const BrandName = styled.span`
   font-size: 14px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text.strong};
-  ${({ theme }) => theme.typography.bold24}
+  ${({ theme }) => theme.typography.b24}
 `;
 
 const DateDisplay = styled.div`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.text.default};
-  ${({ theme }) => theme.typography.medium16}
+  ${({ theme }) => theme.typography.m16}
 `;
 
 const Header = () => {

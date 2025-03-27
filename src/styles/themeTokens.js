@@ -1,18 +1,18 @@
 export const typography = {
-  bold24: { fontWeight: 700, fontSize: '24px', lineHeight: 'auto' },
-  bold16: { fontWeight: 700, fontSize: '16px', lineHeight: 'auto' },
-  bold14: { fontWeight: 700, fontSize: '14px', lineHeight: 'auto' },
-  bold12: { fontWeight: 700, fontSize: '12px', lineHeight: 'auto' },
-  medium16: { fontWeight: 500, fontSize: '16px', lineHeight: '22px' },
-  medium14: { fontWeight: 500, fontSize: '14px', lineHeight: 'auto' },
-  medium12: { fontWeight: 500, fontSize: '12px', lineHeight: 'auto' },
-  regular14: { fontWeight: 400, fontSize: '14px', lineHeight: 'auto' },
-  regular12: { fontWeight: 400, fontSize: '12px', lineHeight: 'auto' },
+  b24: { fontWeight: 700, fontSize: '24px', lineHeight: 'auto' },
+  b16: { fontWeight: 700, fontSize: '16px', lineHeight: 'auto' },
+  b14: { fontWeight: 700, fontSize: '14px', lineHeight: 'auto' },
+  b12: { fontWeight: 700, fontSize: '12px', lineHeight: 'auto' },
+  m16: { fontWeight: 500, fontSize: '16px', lineHeight: '22px' },
+  m14: { fontWeight: 500, fontSize: '14px', lineHeight: 'auto' },
+  m12: { fontWeight: 500, fontSize: '12px', lineHeight: 'auto' },
+  r14: { fontWeight: 400, fontSize: '14px', lineHeight: 'auto' },
+  r12: { fontWeight: 400, fontSize: '12px', lineHeight: 'auto' },
 };
 
 export const radius = {
   full: '999px',
-  medium: '8px',
+  m: '8px',
 };
 
 export const shadow = {
