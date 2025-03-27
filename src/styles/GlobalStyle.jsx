@@ -6,6 +6,12 @@ const globalStyles = (theme) => css`
   ${emotionReset}
 
   body {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'Pretendard', sans-serif;
     background-color: ${theme.colors.surface.default};
     color: ${theme.colors.text.default};

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import DarkModeToggle from './components/Theme/DarkModeToggle';
 import ThemeProvider from './components/Theme/ThemeProvider';
+import Header from './components/Header';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -13,7 +14,7 @@ function App() {
   return (
     <ThemeProvider isDarkMode={isDarkMode}>
       <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
-      <h1>Hello Vite</h1>
+      <Header />
     </ThemeProvider>
   );
 }
