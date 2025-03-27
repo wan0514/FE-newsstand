@@ -1,1 +1,3 @@
-//List View Component
+export default function ListView() {
+  return <div>ListView</div>;
+}

@@ -22,7 +22,7 @@ const Media = () => {
         isListView={isListView}
         setIsListView={setIsListView}
       />
-      <MediaSection />
+      <MediaSection isListView={isListView} />
     </MediaContainer>
   );
 };
