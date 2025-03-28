@@ -10,7 +10,7 @@ const TabBarContainer = styled.div`
   height: 40px;
 `;
 
-const MedaiTab = ({
+const MediaTab = ({
   isSubscribedTab,
   setIsSubscribedTab,
   isListView,
@@ -27,4 +27,4 @@ const MedaiTab = ({
   );
 };
 
-export default MedaiTab;
+export default MediaTab;

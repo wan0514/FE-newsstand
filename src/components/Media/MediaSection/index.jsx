@@ -1,8 +1,8 @@
 import GridView from './GridView';
 import ListView from './ListView';
 
-const MedaiSection = ({ isListView }) => {
+const MediaSection = ({ isListView }) => {
   return <> {isListView ? <ListView /> : <GridView />} </>;
 };
 
-export default MedaiSection;
+export default MediaSection;

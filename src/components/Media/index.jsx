@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import MediaSection from './MediaSection';
-import MedaiTab from './MediaTab';
+import MediaTab from './MediaTab';
 
 const MediaContainer = styled.div`
   width: 100%;
@@ -16,7 +16,7 @@ const Media = () => {
 
   return (
     <MediaContainer>
-      <MedaiTab
+      <MediaTab
         isSubscribedTab={isSubscribedTab}
         setIsSubscribedTab={setIsSubscribedTab}
         isListView={isListView}

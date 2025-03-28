@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import NewsPaperIcon from '../../assets/icons/newspaper.svg?react';
+import NewsPaperIcon from '@/assets/icons/newspaper.svg?react';
 
 const HeaderBar = styled.header`
   width: 930px;
@@ -24,7 +24,7 @@ const BrandIcon = styled(NewsPaperIcon)`
   color: ${({ theme }) => theme.colors.text.point};
 `;
 
-const BrandName = styled.span`
+const BrandName = styled.h1`
   font-size: 14px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text.strong};
