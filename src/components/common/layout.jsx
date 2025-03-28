@@ -1,18 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 
-const StackLayout = styled.div`
-  > :nth-of-type(1) {
-    margin-bottom: 20px;
-  }
-
-  > :nth-of-type(2) {
-    margin-bottom: 40px;
-  }
-
-  > :nth-of-type(3) {
-    margin-bottom: 32px;
-  }
+const StackWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
+
+function StackLayout({ children, spacing = [] }) {
+  return (
+    <StackWrapper>
+      {children.map((child, index) => (
+        <div key={index} style={{ marginBottom: spacing[index] ?? 0 }}>
+          {child}
+        </div>
+      ))}
+    </StackWrapper>
+  );
+}
 
 export default StackLayout;

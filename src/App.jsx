@@ -16,7 +16,7 @@ function App() {
 
   return (
     <ThemeProvider isDarkMode={isDarkMode}>
-      <StackLayout>
+      <StackLayout spacing={['20px', '40px', '32px']}>
         <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
         <Header />
         <NewsRolling />
