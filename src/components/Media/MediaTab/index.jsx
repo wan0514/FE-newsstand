@@ -20,7 +20,7 @@ const MedaiTab = ({
     <TabBarContainer>
       <TabList
         isSubscribedTab={isSubscribedTab}
-        setIsSubscribedTab={{ setIsSubscribedTab }}
+        setIsSubscribedTab={setIsSubscribedTab}
       />
       <ViewModeToggle isListView={isListView} setIsListView={setIsListView} />
     </TabBarContainer>
