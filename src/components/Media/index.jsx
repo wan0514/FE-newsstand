@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
 import { useState } from 'react';
-
+import styled from '@emotion/styled';
 import MediaSection from './MediaSection';
 import MedaiTab from './MediaTab';
 

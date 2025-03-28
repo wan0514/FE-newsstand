@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-
 import RollingItem from './RollingItem';
 
 const NewsRollingContainer = styled.div`

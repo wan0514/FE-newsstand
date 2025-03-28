@@ -44,13 +44,37 @@ export default [
             'internal', // 프로젝트 내부 alias 경로 (@/components 등)
             ['parent', 'sibling', 'index'], // 상대 경로 import
           ],
-          'newlines-between': 'always', // 그룹 간 줄바꿈
+          pathGroups: [
+            {
+              pattern: '@emotion/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'after',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          'newlines-between': 'never', // 그룹 간 줄바꿈
           alphabetize: {
             order: 'asc', // 알파벳순 정렬
             caseInsensitive: true,
           },
         },
       ],
+    },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['@', './src'],
+            ['@components', './src/components'],
+          ],
+          extensions: ['.js', '.jsx'],
+        },
+      },
     },
   },
 ];
