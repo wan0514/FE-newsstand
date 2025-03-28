@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import DarkModeToggle from './components/Theme/DarkModeToggle';
 import ThemeProvider from './components/Theme/ThemeProvider';
+import StackLayout from './components/common/layout';
 import Header from './components/Header';
 import NewsRolling from './components/NewsRolling';
 import Media from './components/Media';
@@ -15,10 +16,12 @@ function App() {
 
   return (
     <ThemeProvider isDarkMode={isDarkMode}>
-      <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
-      <Header />
-      <NewsRolling />
-      <Media />
+      <StackLayout>
+        <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
+        <Header />
+        <NewsRolling />
+        <Media />
+      </StackLayout>
     </ThemeProvider>
   );
 }
