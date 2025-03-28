@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import MedaiTab from './MediaTab';
+
 import MediaSection from './MediaSection';
+import MedaiTab from './MediaTab';
 
 const MediaContainer = styled.div`
   width: 100%;

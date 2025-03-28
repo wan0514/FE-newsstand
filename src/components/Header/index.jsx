@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+
 import NewsPaperIcon from '../../assets/icons/newspaper.svg?react';
 
 const HeaderBar = styled.header`

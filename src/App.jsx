@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import DarkModeToggle from './components/Theme/DarkModeToggle';
-import ThemeProvider from './components/Theme/ThemeProvider';
+
 import StackLayout from './components/common/layout';
 import Header from './components/Header';
-import NewsRolling from './components/NewsRolling';
 import Media from './components/Media';
+import NewsRolling from './components/NewsRolling';
+import DarkModeToggle from './components/Theme/DarkModeToggle';
+import ThemeProvider from './components/Theme/ThemeProvider';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);

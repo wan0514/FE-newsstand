@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
+
 import { darkTheme, lightTheme } from './themes';
 import { GlobalStyle } from '../../styles/GlobalStyle';
 
