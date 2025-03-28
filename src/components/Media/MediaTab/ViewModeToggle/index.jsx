@@ -15,7 +15,7 @@ const ViewModeToggle = ({ isListView, setIsListView }) => {
         onClick={() => setIsListView(true)}
       />
       <ViewButton
-        type="gird"
+        type="grid"
         isActive={!isListView}
         onClick={() => setIsListView(false)}
       />
