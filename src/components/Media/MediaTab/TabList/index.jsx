@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Badge from './Badge';
 import TabItem from './TabItem';
 
 const StyledTabList = styled.div`
@@ -19,8 +18,8 @@ const TabList = ({ isSubscribedTab, setIsSubscribedTab }) => {
         isActive={isSubscribedTab}
         onClick={() => setIsSubscribedTab(true)}
         label="내가 구독한 언론사"
+        badgeLabel="8"
       />
-      <Badge>8</Badge>
     </StyledTabList>
   );
 };

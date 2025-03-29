@@ -1,6 +1,7 @@
 // components/TabItem.jsx
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import Badge from '@components/common/Badge';
 
 const StyledTabItem = styled.button`
   display: flex;
@@ -19,11 +20,22 @@ const StyledTabItem = styled.button`
     isActive ? theme.typography.b16 : theme.typography.m16};
 `;
 
-const TabItem = ({ isActive, onClick, label }) => {
+const LabelWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const TabItem = ({ isActive, onClick, label, badgeLabel }) => {
   return (
-    <StyledTabItem isActive={isActive} onClick={onClick}>
-      {label}
-    </StyledTabItem>
+    <>
+      <StyledTabItem isActive={isActive} onClick={onClick}>
+        <LabelWrapper>
+          {label}
+          {badgeLabel && <Badge label={badgeLabel} isActive={isActive} />}
+        </LabelWrapper>
+      </StyledTabItem>
+    </>
   );
 };
 
