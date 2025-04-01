@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useMemo } from 'react';
 import styled from '@emotion/styled';
 import getFormattedToday from '@/utils/getFormattedToday';
 
@@ -9,7 +10,12 @@ const DateDisplay = styled.div`
 `;
 
 const Header = () => {
-  return <DateDisplay>{getFormattedToday()}</DateDisplay>;
+  const today = useMemo(() => {
+    const now = new Date();
+    return getFormattedToday(now);
+  }, []);
+
+  return <DateDisplay>{today}</DateDisplay>;
 };
 
 export default Header;
