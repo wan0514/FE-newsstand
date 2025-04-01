@@ -11,18 +11,18 @@ const MediaContainer = styled.div`
 `;
 
 const Media = () => {
-  const [isSubscribedTab, setIsSubscribedTab] = useState(false);
-  const [isListView, setIsListView] = useState(false);
+  const [tabType, setTabType] = useState('all');
+  const [viewType, setViewType] = useState('grid');
 
   return (
     <MediaContainer>
       <MediaTab
-        isSubscribedTab={isSubscribedTab}
-        setIsSubscribedTab={setIsSubscribedTab}
-        isListView={isListView}
-        setIsListView={setIsListView}
+        tabType={tabType}
+        setTabType={setTabType}
+        viewType={viewType}
+        setViewType={setViewType}
       />
-      <MediaSection isListView={isListView} />
+      <MediaSection viewType={viewType} />
     </MediaContainer>
   );
 };

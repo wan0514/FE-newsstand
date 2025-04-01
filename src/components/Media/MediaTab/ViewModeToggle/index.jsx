@@ -6,18 +6,18 @@ const StyledViewModeToggle = styled.div`
   gap: 8px;
 `;
 
-const ViewModeToggle = ({ isListView, setIsListView }) => {
+const ViewModeToggle = ({ viewType, setViewType }) => {
   return (
     <StyledViewModeToggle>
       <ViewButton
         type="list"
-        isActive={isListView}
-        onClick={() => setIsListView(true)}
+        isActive={viewType === 'list'}
+        onClick={() => setViewType('list')}
       />
       <ViewButton
         type="grid"
-        isActive={!isListView}
-        onClick={() => setIsListView(false)}
+        isActive={viewType === 'grid'}
+        onClick={() => setViewType('grid')}
       />
     </StyledViewModeToggle>
   );

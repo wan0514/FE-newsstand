@@ -6,17 +6,17 @@ const StyledTabList = styled.div`
   gap: 16px;
 `;
 
-const TabList = ({ isSubscribedTab, setIsSubscribedTab }) => {
+const TabList = ({ tabType, setTabType }) => {
   return (
     <StyledTabList>
       <TabItem
-        isActive={!isSubscribedTab}
-        onClick={() => setIsSubscribedTab(false)}
+        isActive={tabType === 'all'}
+        onClick={() => setTabType('all')}
         label="전체 언론사"
       />
       <TabItem
-        isActive={isSubscribedTab}
-        onClick={() => setIsSubscribedTab(true)}
+        isActive={tabType === 'subscribed'}
+        onClick={() => setTabType('subscribed')}
         label="내가 구독한 언론사"
         badgeLabel="8"
       />
