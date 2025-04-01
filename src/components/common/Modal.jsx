@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 
-const AlertContainer = styled.div`
+const ModalContainer = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -17,7 +17,7 @@ const AlertContainer = styled.div`
   z-index: 1000;
 `;
 
-const AlertContent = styled.div`
+const ModalContent = styled.div`
   width: 320px;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@ const Button = styled.button`
   }
 `;
 
-const Alert = ({ mediaName, isModalOpen, handleClose }) => {
+const Modal = ({ mediaName, isModalOpen, handleClose }) => {
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -81,8 +81,8 @@ const Alert = ({ mediaName, isModalOpen, handleClose }) => {
   }, [isModalOpen]);
 
   return (
-    <AlertContainer>
-      <AlertContent>
+    <ModalContainer>
+      <ModalContent>
         <TitleGroup>
           <p>
             <StyledText>{mediaName}</StyledText>을(를)
@@ -95,9 +95,9 @@ const Alert = ({ mediaName, isModalOpen, handleClose }) => {
             아니오
           </Button>
         </ButtonGroup>
-      </AlertContent>
-    </AlertContainer>
+      </ModalContent>
+    </ModalContainer>
   );
 };
 
-export default Alert;
+export default Modal;
