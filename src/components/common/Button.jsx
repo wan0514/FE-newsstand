@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import ClosedIcon from '@/assets/icons/closed.svg?react';
 import PlusIcon from '@/assets/icons/plus.svg?react';
 

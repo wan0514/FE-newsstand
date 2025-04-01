@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import emotionReset from 'emotion-reset';
 import { Global, css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 const globalStyles = (theme) => css`
   ${emotionReset}

@@ -1,6 +1,7 @@
 // components/TabItem.jsx
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+
 import Badge from '@components/common/Badge';
 
 const StyledTabItem = styled.button`

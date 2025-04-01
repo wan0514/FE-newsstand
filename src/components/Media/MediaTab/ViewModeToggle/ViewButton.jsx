@@ -1,6 +1,7 @@
 // components/TabItem.jsx
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+
 import GridIcon from '@/assets/icons/grid-view.svg?react';
 import ListIcon from '@/assets/icons/list-view.svg?react';
 
