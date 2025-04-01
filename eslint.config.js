@@ -46,18 +46,13 @@ export default [
           ],
           pathGroups: [
             {
-              pattern: '@emotion/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
               pattern: '@/**',
               group: 'internal',
               position: 'after',
             },
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
-          'newlines-between': 'never', // 그룹 간 줄바꿈
+          'newlines-between': 'always', // 그룹 간 줄바꿈
           alphabetize: {
             order: 'asc', // 알파벳순 정렬
             caseInsensitive: true,

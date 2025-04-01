@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+
 import BrandSection from './BrandSection';
 import DateDisplay from './DateDisplay';
 
