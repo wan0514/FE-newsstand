@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
 
+import Alert from '@components/common/Alert';
 import StackLayout from '@components/common/layout';
 import Header from '@components/Header';
 import Media from '@components/Media';
@@ -10,9 +11,15 @@ import ThemeProvider from '@components/Theme/ThemeProvider';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [targetItem, setTargetItem] = useState('연합뉴스');
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false); // 모달 닫기
   };
 
   return (
@@ -21,8 +28,15 @@ function App() {
         <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
         <Header />
         <NewsRolling />
-        <Media />
+        <button onClick={() => setIsModalOpen(true)}>버튼</button>
       </StackLayout>
+      {isModalOpen && (
+        <Alert
+          mediaName={targetItem}
+          isModalOpen={isModalOpen}
+          handleClose={handleClose}
+        />
+      )}
     </ThemeProvider>
   );
 }
