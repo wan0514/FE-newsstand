@@ -2,7 +2,9 @@
 import styled from '@emotion/styled';
 
 import FieldTab from './FieldTab';
+import MainNewsItem from './MainNewsItem';
 import PressInfo from './PressInfo';
+import SubNewsList from './SubNewsList';
 
 const Container = styled.div`
   display: flex;
@@ -27,41 +29,12 @@ const News = styled.div`
   gap: 16px;
 `;
 
-const MainNewsItem = styled.div`
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const Thumbnail = styled.img`
-  width: 100%;
-  height: auto;
-`;
-
-const MainTitle = styled.div`
-  ${({ theme }) => theme.typography.m16}
-  color: ${({ theme }) => theme.colors.text.strong};
-`;
-
 const RightNewsColumn = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-`;
-
-const SubNewsList = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const SubNewsItem = styled.div`
-  ${({ theme }) => theme.typography.m16}
-  color: ${({ theme }) => theme.colors.text.bold};
 `;
 
 const EditedByPress = styled.div`
@@ -79,18 +52,9 @@ const ListView = ({ data }) => {
       <PressNews>
         <PressInfo logoUrl={logoSrc} editedTime={editedTime} />
         <News>
-          <MainNewsItem>
-            <Thumbnail src={mainNews.thumbnail} alt="뉴스 이미지" />
-            <MainTitle>{mainNews.title}</MainTitle>
-          </MainNewsItem>
-
+          <MainNewsItem mainNews={mainNews} />
           <RightNewsColumn>
-            <SubNewsList>
-              {subNewsList.map((news) => (
-                <SubNewsItem key={news.id}>{news.title}</SubNewsItem>
-              ))}
-            </SubNewsList>
-
+            <SubNewsList subNewsList={subNewsList} />
             <EditedByPress>
               {pressName} 언론사에서 직접 편집한 뉴스입니다.
             </EditedByPress>
