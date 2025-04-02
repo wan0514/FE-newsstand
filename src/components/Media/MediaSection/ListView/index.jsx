@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 
-import sampleThumbnail from '@/assets/images/Thumbnail.png';
-
 import FieldTab from './FieldTab';
 import PressInfo from './PressInfo';
 
