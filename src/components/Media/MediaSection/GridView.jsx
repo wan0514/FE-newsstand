@@ -38,7 +38,7 @@ const Logo = styled.img`
   object-fit: contain;
 `;
 
-export default function GridView({ mediaList }) {
+export default function GridView({ data: mediaList }) {
   const rows = Array.from({ length: 4 }, (_, rowIndex) => {
     const start = rowIndex * 6;
     const rowItems = mediaList.slice(start, start + 6);
