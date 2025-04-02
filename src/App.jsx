@@ -19,7 +19,7 @@ function App() {
   };
 
   const handleClose = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalOpen(false);
   };
 
   return (
@@ -29,7 +29,6 @@ function App() {
         <Header />
         <NewsRolling />
         <Media />
-        <button onClick={() => setIsModalOpen(true)}>버튼</button>
       </StackLayout>
       {isModalOpen && (
         <Modal
