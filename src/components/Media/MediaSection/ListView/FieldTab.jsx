@@ -7,7 +7,11 @@ const StyledFieldTab = styled.div`
   background-color: ${({ theme }) => theme.colors.surface.alt};
 `;
 
-const TabButton = styled.button`
+const StyledButton = styled.button`
+  width: ${({ isActive }) => (isActive ? '166px' : 'auto')};
+  display: flex;
+  gap: 8px;
+  align-items: center;
   height: 100%;
   padding: 11.5px 16px;
   border: none;
@@ -20,7 +24,31 @@ const TabButton = styled.button`
     isActive ? theme.colors.text.whiteDefault : theme.colors.text.default};
 `;
 
-export default function FieldTab({ category, setCategory }) {
+const LabelText = styled.span`
+  display: flex;
+  flex-grow: ${({ isActive }) => (isActive ? 1 : 0)};
+`;
+
+const CountText = styled.span`
+  ${({ theme }) => theme.typography.b12}
+  color: ${({ theme }) => theme.colors.text.whiteWeak};
+`;
+
+function TabButton({ label, isActive, onClick, count }) {
+  return (
+    <StyledButton isActive={isActive} onClick={onClick}>
+      <LabelText isActive={isActive}>{label}</LabelText>
+      {isActive && count != null && <CountText>{count}</CountText>}
+    </StyledButton>
+  );
+}
+
+export default function FieldTab({
+  category,
+  setCategory,
+  pressLength,
+  currentIndex,
+}) {
   const fieldMap = [
     { id: 1, label: '종합/경제', key: 'generalEconomy' },
     { id: 2, label: '방송/통신', key: 'broadcastMedia' },
@@ -31,16 +59,18 @@ export default function FieldTab({ category, setCategory }) {
     { id: 7, label: '지역', key: 'local' },
   ];
 
+  const countLabel = `${currentIndex + 1}/${pressLength}`;
+
   return (
     <StyledFieldTab>
       {fieldMap.map(({ key, label }) => (
         <TabButton
           key={key}
+          label={label}
           onClick={() => setCategory(key)}
           isActive={category === key}
-        >
-          {label}
-        </TabButton>
+          count={countLabel}
+        />
       ))}
     </StyledFieldTab>
   );

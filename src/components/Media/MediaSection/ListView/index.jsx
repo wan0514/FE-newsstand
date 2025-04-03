@@ -54,10 +54,16 @@ const ListView = ({ data: pressList }) => {
 
   const mainNews = materials[0];
   const subNewsList = materials.slice(1);
+  const pressListLength = pressList[category].length;
 
   return (
     <Container>
-      <FieldTab category={category} setCategory={setCategory} />
+      <FieldTab
+        category={category}
+        setCategory={setCategory}
+        pressLength={pressListLength}
+        currentIndex={currentIndex}
+      />
       <PressNews>
         <PressInfo logoUrl={logoLight} editedTime={regDate} />
         <News>
