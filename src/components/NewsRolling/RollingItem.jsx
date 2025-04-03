@@ -13,10 +13,10 @@ const Wrapper = styled.div`
 const InnerList = styled.div`
   display: flex;
   flex-direction: column;
-  transition: transform 0.5s ease-in-out;
-  transform: translateY(${({ index }) => `-${index * 49}px`});
-  transition: ${({ isTransitioning }) =>
-    isTransitioning ? 'transform 0.5s ease-in-out' : 'none'};
+  transition: ${({ isSliding }) =>
+    isSliding ? 'transform 0.5s ease-in-out' : 'none'};
+  transform: ${({ isSliding }) =>
+    isSliding ? 'translateY(-49px)' : 'translateY(0)'};
 `;
 
 const RollingItemContainer = styled.div`
@@ -48,49 +48,46 @@ const NewsTitle = styled.span`
 
 const RollingItem = ({ data }) => {
   const [index, setIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const intervalRef = useRef(null);
+  const [isSliding, setIsSliding] = useState(false);
+  const timeoutRef = useRef(null);
 
-  const extendedData = [...data, data[0]];
+  const visibleItems = [
+    data[index % data.length],
+    data[(index + 1) % data.length],
+  ];
 
   function handlePause() {
-    clearInterval(intervalRef.current);
+    clearInterval(timeoutRef.current);
   }
 
   function handleResume() {
-    clearInterval(intervalRef.current);
+    handlePause(); // 혹시라도 남아있는 타이머 제거
+    scheduleNextSlide(); // 다시 시작
+  }
 
-    intervalRef.current = setInterval(() => {
-      setIndex((prev) => prev + 1);
-    }, 5000);
+  function scheduleNextSlide() {
+    timeoutRef.current = setTimeout(() => {
+      setIsSliding(true);
+
+      // 1. 슬라이딩 완료 후: 위치 리셋 + 데이터 전환
+      setTimeout(() => {
+        setIsSliding(false);
+        setIndex((prev) => prev + 1);
+        scheduleNextSlide(); // 재귀 호출로 반복
+      }, 500); // transition 시간과 일치
+    }, 5000); // 슬라이딩 간격
   }
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setIndex((prev) => prev + 1);
-    }, 5000);
-
-    return () => clearInterval(intervalRef.current);
-  }, [data.length]);
-
-  useEffect(() => {
-    if (index === data.length) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setIndex(0);
-      }, 500);
-
-      setTimeout(() => {
-        setIsTransitioning(true);
-      }, 600);
-    }
-  }, [index, data.length]);
+    scheduleNextSlide();
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   return (
     <Wrapper onMouseEnter={handlePause} onMouseLeave={handleResume}>
-      <InnerList index={index} isTransitioning={isTransitioning}>
-        {extendedData.map((news, index) => (
-          <RollingItemContainer key={index}>
+      <InnerList index={index} isSliding={isSliding}>
+        {visibleItems.map((news, idx) => (
+          <RollingItemContainer key={idx}>
             <NewsSource>{news.press}</NewsSource>
             <NewsTitle>{news.title}</NewsTitle>
           </RollingItemContainer>
