@@ -27,8 +27,16 @@ const TableCell = styled.td`
     cursor: pointer;
   }
 
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.surface.alt};
+  }
+
   &:hover button {
     opacity: 1;
+  }
+
+  &:hover img {
+    opacity: 0;
   }
 `;
 
