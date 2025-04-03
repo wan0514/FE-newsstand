@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useState, useEffect, useMemo } from 'react';
 
+import chunkArray from '@/utils/chunkArray';
+
 import RollingItem from './RollingItem';
 
 const NewsRollingContainer = styled.div`
@@ -10,14 +12,6 @@ const NewsRollingContainer = styled.div`
 
 export default function NewsRolling() {
   const [rollingNewsData, setRollingNewsData] = useState([]);
-
-  function chunkArray(array, size) {
-    const chunks = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunks.push(array.slice(i, i + size));
-    }
-    return chunks;
-  }
 
   const chunkedData = useMemo(() => {
     return chunkArray(rollingNewsData, 5);

@@ -1,15 +1,33 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import { useEffect, useState } from 'react';
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 49px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
+`;
+
+const InnerList = styled.div`
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(${({ index }) => `-${index * 49}px`});
+  transition: ${({ isTransitioning }) =>
+    isTransitioning ? 'transform 0.5s ease-in-out' : 'none'};
+`;
 
 const RollingItemContainer = styled.div`
   width: 100%;
+  height: 49px;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
+  padding: 0 16px;
   color: ${({ theme }) => theme.colors.text.strong};
   background-color: ${({ theme }) => theme.colors.surface.alt};
-  border: 1px solid ${({ theme }) => theme.colors.border.default};
   ${({ theme }) => theme.typography.b14}
 `;
 
@@ -24,11 +42,43 @@ const NewsTitle = styled.span`
 `;
 
 const RollingItem = ({ data }) => {
+  const [index, setIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  const extendedData = [...data, data[0]];
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 5000);
+
+    return () => clearInterval(intervalId); // unmount 될 때 interval clear
+  }, [data.length]);
+
+  useEffect(() => {
+    if (index === data.length) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setIndex(0);
+      }, 500);
+
+      setTimeout(() => {
+        setIsTransitioning(true);
+      }, 600);
+    }
+  }, [index, data.length]);
+
   return (
-    <RollingItemContainer>
-      <NewsSource>{data[0].press}</NewsSource>
-      <NewsTitle>{data[0].title}</NewsTitle>
-    </RollingItemContainer>
+    <Wrapper>
+      <InnerList index={index} isTransitioning={isTransitioning}>
+        {extendedData.map((news) => (
+          <RollingItemContainer key={news.id}>
+            <NewsSource>{news.press}</NewsSource>
+            <NewsTitle>{news.title}</NewsTitle>
+          </RollingItemContainer>
+        ))}
+      </InnerList>
+    </Wrapper>
   );
 };
 
