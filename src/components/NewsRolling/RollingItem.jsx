@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -39,20 +39,38 @@ const NewsTitle = styled.span`
   flex-grow: 1;
   color: ${({ theme }) => theme.colors.text.default};
   ${({ theme }) => theme.typography.m14}
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const RollingItem = ({ data }) => {
   const [index, setIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const intervalRef = useRef(null);
 
   const extendedData = [...data, data[0]];
 
+  function handlePause() {
+    clearInterval(intervalRef.current);
+  }
+
+  function handleResume() {
+    clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 5000);
+  }
+
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setIndex((prev) => prev + 1);
     }, 5000);
 
-    return () => clearInterval(intervalId); // unmount 될 때 interval clear
+    return () => clearInterval(intervalRef.current);
   }, [data.length]);
 
   useEffect(() => {
@@ -69,7 +87,7 @@ const RollingItem = ({ data }) => {
   }, [index, data.length]);
 
   return (
-    <Wrapper>
+    <Wrapper onMouseEnter={handlePause} onMouseLeave={handleResume}>
       <InnerList index={index} isTransitioning={isTransitioning}>
         {extendedData.map((news) => (
           <RollingItemContainer key={news.id}>
