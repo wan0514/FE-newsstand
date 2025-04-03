@@ -16,18 +16,27 @@ const Media = () => {
   const [listData, setListData] = useState([]);
   const [tabType, setTabType] = useState('all');
   const [viewType, setViewType] = useState('grid');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/mockData/pressList.json') // grid view용 데이터
-      .then((res) => res.json())
-      .then(setGridData)
-      .catch((err) => console.error('gridData fetch error:', err));
-
-    fetch('/mockData/pressNews.json') // list view용 데이터
-      .then((res) => res.json())
-      .then(setListData)
-      .catch((err) => console.error('listData fetch error:', err));
+    Promise.all([
+      fetch('/mockData/pressList.json').then((res) => res.json()),
+      fetch('/mockData/mockData.json').then((res) => res.json()),
+    ])
+      .then(([grid, list]) => {
+        setGridData(grid);
+        setListData(list);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error('데이터 fetch error:', err);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <MediaContainer>

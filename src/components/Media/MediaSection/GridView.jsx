@@ -38,16 +38,16 @@ const Logo = styled.img`
   object-fit: contain;
 `;
 
-export default function GridView({ data: mediaList }) {
+export default function GridView({ data: pressList }) {
   const rows = Array.from({ length: 4 }, (_, rowIndex) => {
     const start = rowIndex * 6;
-    const rowItems = mediaList.slice(start, start + 6);
+    const rowItems = pressList.slice(start, start + 6);
 
     return (
       <TableRow key={rowIndex}>
-        {rowItems.map((media, colIndex) => (
-          <TableCell key={colIndex}>
-            <Logo src={media.imageUrl} alt={`${media.name} 로고`} />
+        {rowItems.map((press) => (
+          <TableCell key={press.pid}>
+            <Logo src={press.logoLight} alt={`${press.name} 로고`} />
             <Button isEmphasized label="구독하기" iconType="plus" />
           </TableCell>
         ))}

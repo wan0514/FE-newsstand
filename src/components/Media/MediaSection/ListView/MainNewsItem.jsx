@@ -21,7 +21,7 @@ const MainTitle = styled.div`
 export default function MainNewsItem({ mainNews }) {
   return (
     <StyledMainNewsItem>
-      <Thumbnail src={mainNews.thumbnail} alt="뉴스 이미지" />
+      <Thumbnail src={mainNews.imageUrl} alt="뉴스 이미지" />
       <MainTitle>{mainNews.title}</MainTitle>
     </StyledMainNewsItem>
   );

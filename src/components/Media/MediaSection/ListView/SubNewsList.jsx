@@ -17,7 +17,7 @@ export default function SubNewsList({ subNewsList }) {
   return (
     <StyledSubNewsList>
       {subNewsList.map((news) => (
-        <SubNewsItem key={news.id}>{news.title}</SubNewsItem>
+        <SubNewsItem key={news._id}>{news.title}</SubNewsItem>
       ))}
     </StyledSubNewsList>
   );
