@@ -89,8 +89,8 @@ const RollingItem = ({ data }) => {
   return (
     <Wrapper onMouseEnter={handlePause} onMouseLeave={handleResume}>
       <InnerList index={index} isTransitioning={isTransitioning}>
-        {extendedData.map((news) => (
-          <RollingItemContainer key={news.id}>
+        {extendedData.map((news, index) => (
+          <RollingItemContainer key={index}>
             <NewsSource>{news.press}</NewsSource>
             <NewsTitle>{news.title}</NewsTitle>
           </RollingItemContainer>
