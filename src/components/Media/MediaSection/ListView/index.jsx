@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 import FieldTab from './FieldTab';
 import MainNewsItem from './MainNewsItem';
@@ -44,19 +45,27 @@ const EditedByPress = styled.div`
   color: ${({ theme }) => theme.colors.text.weak};
 `;
 
-const ListView = ({ data }) => {
-  const { logoSrc, editedTime, mainNews, subNewsList, pressName } = data;
+const ListView = ({ data: pressList }) => {
+  const [category, setCategory] = useState('generalEconomy');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { logoLight, regDate, materials, name } =
+    pressList[category][currentIndex];
+
+  const mainNews = materials[0];
+  const subNewsList = materials.slice(1);
+
   return (
     <Container>
-      <FieldTab />
+      <FieldTab category={category} setCategory={setCategory} />
       <PressNews>
-        <PressInfo logoUrl={logoSrc} editedTime={editedTime} />
+        <PressInfo logoUrl={logoLight} editedTime={regDate} />
         <News>
           <MainNewsItem mainNews={mainNews} />
           <RightNewsColumn>
             <SubNewsList subNewsList={subNewsList} />
             <EditedByPress>
-              {pressName} 언론사에서 직접 편집한 뉴스입니다.
+              {name} 언론사에서 직접 편집한 뉴스입니다.
             </EditedByPress>
           </RightNewsColumn>
         </News>
