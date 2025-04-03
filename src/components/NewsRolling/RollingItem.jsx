@@ -23,13 +23,11 @@ const NewsTitle = styled.span`
   ${({ theme }) => theme.typography.m14}
 `;
 
-const RollingItem = () => {
+const RollingItem = ({ data }) => {
   return (
     <RollingItemContainer>
-      <NewsSource>연합뉴스</NewsSource>
-      <NewsTitle>
-        [1보] 김기현·안철수·천하람 황교안, 與전대 본경선 진출
-      </NewsTitle>
+      <NewsSource>{data[0].press}</NewsSource>
+      <NewsTitle>{data[0].title}</NewsTitle>
     </RollingItemContainer>
   );
 };
