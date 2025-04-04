@@ -47,7 +47,7 @@ export default function FieldTab({
   category,
   setCategory,
   pressLength,
-  currentIndex,
+  currentPage,
 }) {
   const fieldMap = [
     { id: 1, label: '종합/경제', key: 'generalEconomy' },
@@ -59,7 +59,7 @@ export default function FieldTab({
     { id: 7, label: '지역', key: 'local' },
   ];
 
-  const countLabel = `${currentIndex + 1}/${pressLength}`;
+  const countLabel = `${currentPage}/${pressLength}`;
 
   return (
     <StyledFieldTab>
