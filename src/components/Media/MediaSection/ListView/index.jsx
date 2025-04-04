@@ -4,21 +4,19 @@ import ListView from './ListView';
 
 const ListViewContainer = ({ data: pressList }) => {
   const [category, setCategory] = useState('generalEconomy');
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [currentPressIndex, setCurrentPressIndex] = useState(1);
 
   const selectedPressList = pressList[category];
-  const data = pressList[category][currentPage];
+  const selectedPressData = pressList[category][currentPressIndex];
 
   return (
     <ListView
       category={category}
       setCategory={setCategory}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      data={data}
+      currentPressIndex={currentPressIndex}
+      setCurrentPressIndex={setCurrentPressIndex}
+      data={selectedPressData}
       totalPressCount={selectedPressList.length}
-      itemsPerPage={itemsPerPage}
     />
   );
 };
