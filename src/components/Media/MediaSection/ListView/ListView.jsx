@@ -48,8 +48,8 @@ const ListView = ({
   data: pressList,
   category,
   setCategory,
-  currentPage,
-  setCurrentPage,
+  currentPressIndex,
+  setCurrentPressIndex,
   totalPressCount,
 }) => {
   const { logoLight, regDate, materials, name } = pressList;
@@ -63,7 +63,7 @@ const ListView = ({
         category={category}
         setCategory={setCategory}
         pressLength={totalPressCount}
-        currentPage={currentPage}
+        currentPressIndex={currentPressIndex}
       />
       <PressNews>
         <PressInfo logoUrl={logoLight} editedTime={regDate} />
