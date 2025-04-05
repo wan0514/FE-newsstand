@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 
 import CarouselButton from './Carousel';
+import useCarousel from './Carousel/useCarousel';
 import GridView from './GridView';
 import ListView from './ListView';
 
@@ -29,13 +31,8 @@ const Button = styled(CarouselButton)`
 `;
 
 const MediaSection = ({ viewType, data }) => {
-  function handlePrev() {
-    console.log('왼쪽 클릭');
-  }
-
-  function handleNext() {
-    console.log('오른쪽 클릭');
-  }
+  const [totalPage, setTotalPage] = useState(0);
+  const { currentPage, goNext, goPrev, reset } = useCarousel({ totalPage });
 
   function getViewComponent(type) {
     const map = {
@@ -47,11 +44,20 @@ const MediaSection = ({ viewType, data }) => {
 
   const ViewComponet = getViewComponent(viewType);
 
+  useEffect(() => {
+    reset();
+  }, [viewType]);
+
   return (
     <MediaContainer>
-      <Button position="prev" handler={handlePrev} />
-      <ViewComponet data={data} />
-      <Button position="next" handler={handleNext} />
+      {currentPage > 0 && <Button position="prev" handler={goPrev} />}
+      <ViewComponet
+        data={data}
+        setTotalPage={setTotalPage}
+        currentPage={currentPage}
+        reset={reset}
+      />
+      {currentPage < totalPage && <Button position="next" handler={goNext} />}
     </MediaContainer>
   );
 };
