@@ -57,7 +57,7 @@ export default function FieldTab({
     { id: 7, label: '지역', key: 'local' },
   ];
 
-  const countLabel = `${currentPressIndex}/${pressLength}`;
+  const countLabel = `${currentPressIndex + 1}/${pressLength}`;
 
   return (
     <StyledFieldTab>

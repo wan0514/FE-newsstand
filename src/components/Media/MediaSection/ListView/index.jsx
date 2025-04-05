@@ -1,20 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ListView from './ListView';
 
-const ListViewContainer = ({ data: pressList }) => {
+const ListViewContainer = ({
+  data: pressList,
+  setTotalPage,
+  currentPage,
+  reset,
+}) => {
   const [category, setCategory] = useState('generalEconomy');
-  const [currentPressIndex, setCurrentPressIndex] = useState(1);
 
   const selectedPressList = pressList[category];
-  const selectedPressData = pressList[category][currentPressIndex];
+  const selectedPressData = pressList[category][currentPage];
+
+  useEffect(() => {
+    setTotalPage(selectedPressList.length - 1);
+  });
+
+  useEffect(() => {
+    console.log('리셋됨');
+    reset();
+  }, [category]);
 
   return (
     <ListView
       category={category}
       setCategory={setCategory}
-      currentPressIndex={currentPressIndex}
-      setCurrentPressIndex={setCurrentPressIndex}
+      currentPage={currentPage}
       data={selectedPressData}
       totalPressCount={selectedPressList.length}
     />
