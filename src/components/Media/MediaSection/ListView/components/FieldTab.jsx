@@ -14,9 +14,7 @@ const StyledButton = styled.button`
   align-items: center;
   height: 100%;
   padding: 11.5px 16px;
-  border: none;
   font-size: 14px;
-  cursor: pointer;
   background-color: ${({ theme, isActive }) =>
     isActive ? theme.colors.surface.brandAlt : theme.colors.surface.alt};
 
