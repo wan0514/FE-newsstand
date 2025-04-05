@@ -10,6 +10,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 388px;
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
 `;
 
 const PressNews = styled.div`
@@ -17,9 +19,7 @@ const PressNews = styled.div`
   flex-direction: column;
   gap: 12px;
   padding: 24px;
-
-  border: 1px solid ${({ theme }) => theme.colors.border.default};
-  border-top: none;
+  border-top: 1px solid ${({ theme }) => theme.colors.border.default};
 `;
 
 const News = styled.div`
