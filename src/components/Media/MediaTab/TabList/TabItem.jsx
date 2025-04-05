@@ -9,10 +9,6 @@ const StyledTabItem = styled.button`
   align-items: center;
   font-size: 14px;
   font-weight: 500;
-  background: none;
-  padding: 0;
-  border: none;
-  cursor: pointer;
 
   color: ${({ theme, isActive }) =>
     isActive ? theme.colors.text.strong : theme.colors.text.weak};

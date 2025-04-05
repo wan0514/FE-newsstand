@@ -54,8 +54,6 @@ const ButtonGroup = styled.div`
 const Button = styled.button`
   width: 100%;
   padding: 10px 20px;
-  border: none;
-  cursor: pointer;
   background-color: ${({ theme }) => theme.colors.surface.alt};
   color: ${({ emphasized, theme }) =>
     emphasized ? theme.colors.text.strong : theme.colors.text.default};
