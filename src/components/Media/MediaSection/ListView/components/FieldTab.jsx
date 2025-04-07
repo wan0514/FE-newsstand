@@ -44,12 +44,12 @@ function TabButton({ label, isActive, onClick, count }) {
 }
 
 export default function FieldTab({
-  category,
+  currentCategory,
   handleCategory,
-  pressLength,
+  totalPressCount,
   currentPressIndex,
 }) {
-  const countLabel = `${currentPressIndex + 1}/${pressLength}`;
+  const countLabel = `${currentPressIndex + 1}/${totalPressCount}`;
 
   return (
     <StyledFieldTab>
@@ -58,7 +58,7 @@ export default function FieldTab({
           key={key}
           label={label}
           onClick={() => handleCategory(key)}
-          isActive={category === key}
+          isActive={currentCategory === key}
           count={countLabel}
         />
       ))}

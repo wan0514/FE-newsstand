@@ -44,29 +44,29 @@ const EditedByPress = styled.div`
 `;
 
 const ListView = ({
-  data: pressList,
-  category,
-  setCategory,
+  data: pressData,
+  currentCategory,
+  setCurrentCategory,
   currentPage,
   totalPressCount,
   reset,
 }) => {
-  const { logoLight, regDate, materials, name } = pressList;
+  const { logoLight, regDate, materials, name } = pressData;
 
   const mainNews = materials[0];
   const subNewsList = materials.slice(1);
 
   function handleCategory(key) {
     reset();
-    setCategory(key);
+    setCurrentCategory(key);
   }
 
   return (
     <Container>
       <FieldTab
-        category={category}
+        currentCategory={currentCategory}
         handleCategory={handleCategory}
-        pressLength={totalPressCount}
+        totalPressCount={totalPressCount}
         currentPressIndex={currentPage}
       />
       <PressNews>
