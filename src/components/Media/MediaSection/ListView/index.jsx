@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { fieldMap } from '@/utils/constants/constants';
 
@@ -14,15 +14,23 @@ const ListViewContainer = ({ data: pressList }) => {
   const selectedPressList = pressList[category];
   const selectedPressData = selectedPressList[currentPage];
 
+  const getCategoryIndex = useCallback(
+    (direction) => {
+      const currentIndex = fieldMap.findIndex((item) => item.key === category);
+      const nextIndex =
+        (currentIndex + direction + fieldMap.length) % fieldMap.length;
+      return nextIndex;
+    },
+    [category]
+  );
+
   function goToPrevPage() {
     if (currentPage === 0) {
-      const currentIndex = fieldMap.findIndex((item) => item.key === category);
-      const prevIndex = (currentIndex - 1 + fieldMap.length) % fieldMap.length;
+      const prevIndex = getCategoryIndex(-1);
       const prevCategory = fieldMap[prevIndex].key;
 
       // 카테고리 변경 전에 이전 카테고리의 총 페이지 수를 계산 : category 상태는 이전값.
       const prevCategoryTotalPage = pressList[prevCategory].length - 1;
-
       setCategory(prevCategory);
       reset(prevCategoryTotalPage);
     } else {
@@ -32,9 +40,10 @@ const ListViewContainer = ({ data: pressList }) => {
 
   function goToNextPage() {
     if (currentPage === totalPage) {
-      const currentIndex = fieldMap.findIndex((item) => item.key === category);
-      const nextIndex = (currentIndex + 1) % fieldMap.length;
-      setCategory(fieldMap[nextIndex].key);
+      const nextIndex = getCategoryIndex(1);
+      const nextCategory = fieldMap[nextIndex].key;
+
+      setCategory(nextCategory);
       reset();
     } else {
       goNext();
@@ -43,7 +52,7 @@ const ListViewContainer = ({ data: pressList }) => {
 
   useEffect(() => {
     setTotalPage(selectedPressList.length - 1);
-  }, [category, selectedPressList]);
+  }, [category]);
 
   useEffect(() => {
     const interval = setInterval(() => {
