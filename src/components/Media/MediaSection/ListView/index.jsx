@@ -58,7 +58,7 @@ const ListViewContainer = ({ data: pressList }) => {
   function goToNextPage() {
     if (currentPage === totalPage) {
       const currentIndex = fieldMap.findIndex((item) => item.key === category);
-      const nextIndex = ((currentIndex + 1) % fieldMap.length) - 1;
+      const nextIndex = (currentIndex + 1) % fieldMap.length;
       setCategory(fieldMap[nextIndex].key);
       reset();
     } else {
@@ -68,7 +68,15 @@ const ListViewContainer = ({ data: pressList }) => {
 
   useEffect(() => {
     setTotalPage(selectedPressList.length - 1);
-  }, [category, selectedPressList, setTotalPage]);
+  }, [category, selectedPressList]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNextPage();
+    }, 20000);
+
+    return () => clearInterval(interval);
+  }, [currentPage, totalPage, category]);
 
   return (
     <MediaContainer>
