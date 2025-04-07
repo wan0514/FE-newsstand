@@ -33,7 +33,7 @@ const Button = styled(CarouselButton)`
 
 const ListViewContainer = ({ data: pressList }) => {
   const [totalPage, setTotalPage] = useState(0);
-  const { currentPage, goNext, goPrev, reset } = useCarousel({ totalPage });
+  const { currentPage, goNext, goPrev, reset } = useCarousel();
   const [category, setCategory] = useState('generalEconomy');
 
   const selectedPressList = pressList[category];

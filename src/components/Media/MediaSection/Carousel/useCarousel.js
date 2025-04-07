@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-export default function useCarousel({ autoPlay = true, totalPage }) {
+export default function useCarousel() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isAutoPlay, setAutoPlay] = useState(autoPlay);
 
   function goNext() {
     setCurrentPage((prev) => prev + 1);
@@ -16,20 +15,10 @@ export default function useCarousel({ autoPlay = true, totalPage }) {
     setCurrentPage(page);
   }
 
-  function startAutoPlay() {
-    setAutoPlay(true);
-  }
-
-  function stopAutoPlay() {
-    setAutoPlay(false);
-  }
-
   return {
     currentPage,
     goNext,
     goPrev,
     reset,
-    startAutoPlay,
-    stopAutoPlay,
   };
 }

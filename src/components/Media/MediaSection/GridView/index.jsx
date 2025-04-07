@@ -31,7 +31,7 @@ const Button = styled(CarouselButton)`
 
 const GridViewContainer = ({ data: pressList }) => {
   const [totalPage, setTotalPage] = useState(0);
-  const { currentPage, goNext, goPrev } = useCarousel({ totalPage });
+  const { currentPage, goNext, goPrev } = useCarousel();
 
   const ITEMS_PER_PAGE = 24;
   const MAX_PAGE = 4;
