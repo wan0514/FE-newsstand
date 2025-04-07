@@ -12,8 +12,8 @@ export default function useCarousel({ autoPlay = true, totalPage }) {
     setCurrentPage((prev) => prev - 1);
   }
 
-  function reset() {
-    setCurrentPage(0);
+  function reset(page = 0) {
+    setCurrentPage(page);
   }
 
   function startAutoPlay() {
