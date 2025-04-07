@@ -1,17 +1,43 @@
-import LeftArrow from '@/assets/icons/LeftButton.svg?react';
-import RightArrow from '@/assets/icons/RightButton.svg?react';
+import styled from '@emotion/styled';
 
-export default function CarouselButton({ position, handler, className }) {
-  const Icon = position === 'prev' ? LeftArrow : RightArrow;
+import CarouselButton from './CarouselButton';
 
+const CarouselContainer = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled(CarouselButton)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  ${({ position }) => (position === 'prev' ? 'left: -80px;' : 'right: -80px;')}
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+`;
+
+const Carousel = ({
+  children,
+  goPrev,
+  goNext,
+  showPrev = true,
+  showNext = true,
+}) => {
   return (
-    <button
-      onClick={handler}
-      type="button"
-      aria-label={position === 'prev' ? 'Previous slide' : 'Next slide'}
-      className={className}
-    >
-      <Icon />
-    </button>
+    <CarouselContainer>
+      {showPrev && <Button position="prev" handler={goPrev} />}
+      {children}
+      {showNext && <Button position="next" handler={goNext} />}
+    </CarouselContainer>
   );
-}
+};
+
+export default Carousel;
