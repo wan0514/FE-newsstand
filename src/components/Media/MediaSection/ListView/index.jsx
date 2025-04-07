@@ -6,32 +6,35 @@ import ListView from './ListView';
 import Carousel from '../Carousel';
 import useCarousel from '../Carousel/useCarousel';
 
-const ListViewContainer = ({ data: pressList }) => {
+const ListViewContainer = ({ data }) => {
   const [totalPage, setTotalPage] = useState(0);
   const { currentPage, goNext, goPrev, reset } = useCarousel();
-  const [category, setCategory] = useState('generalEconomy');
+  const [currentCategory, setCurrentCategory] = useState('generalEconomy');
 
-  const selectedPressList = pressList[category];
-  const selectedPressData = selectedPressList[currentPage];
+  const pressList = data[currentCategory];
+  const selectedPressData = pressList[currentPage];
 
-  const getCategoryIndex = useCallback(
+  const getCurrentCategoryIndex = useCallback(
     (direction) => {
-      const currentIndex = fieldMap.findIndex((item) => item.key === category);
+      const currentIndex = fieldMap.findIndex(
+        (item) => item.key === currentCategory
+      );
       const nextIndex =
         (currentIndex + direction + fieldMap.length) % fieldMap.length;
       return nextIndex;
     },
-    [category]
+    [currentCategory]
   );
 
   function goToPrevPage() {
     if (currentPage === 0) {
-      const prevIndex = getCategoryIndex(-1);
-      const prevCategory = fieldMap[prevIndex].key;
+      const prevIndex = getCurrentCategoryIndex(-1);
+      const previousCategory = fieldMap[prevIndex].key;
 
-      // 카테고리 변경 전에 이전 카테고리의 총 페이지 수를 계산 : category 상태는 이전값.
-      const prevCategoryTotalPage = pressList[prevCategory].length - 1;
-      setCategory(prevCategory);
+      // 카테고리 변경 전에 이전 카테고리의 총 페이지 수를 계산 : currentCategory 상태는 이전값.
+      const prevCategoryTotalPage = data[previousCategory].length - 1;
+
+      setCurrentCategory(previousCategory);
       reset(prevCategoryTotalPage);
     } else {
       goPrev();
@@ -40,10 +43,10 @@ const ListViewContainer = ({ data: pressList }) => {
 
   function goToNextPage() {
     if (currentPage === totalPage) {
-      const nextIndex = getCategoryIndex(1);
+      const nextIndex = getCurrentCategoryIndex(1);
       const nextCategory = fieldMap[nextIndex].key;
 
-      setCategory(nextCategory);
+      setCurrentCategory(nextCategory);
       reset();
     } else {
       goNext();
@@ -51,8 +54,8 @@ const ListViewContainer = ({ data: pressList }) => {
   }
 
   useEffect(() => {
-    setTotalPage(selectedPressList.length - 1);
-  }, [category]);
+    setTotalPage(pressList.length - 1);
+  }, [currentCategory]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,16 +63,16 @@ const ListViewContainer = ({ data: pressList }) => {
     }, 20000);
 
     return () => clearInterval(interval);
-  }, [currentPage, totalPage, category]);
+  }, [currentPage, totalPage, currentCategory]);
 
   return (
     <Carousel goPrev={goToPrevPage} goNext={goToNextPage}>
       <ListView
-        category={category}
-        setCategory={setCategory}
+        currentCategory={currentCategory}
+        setCurrentCategory={setCurrentCategory}
         currentPage={currentPage}
         data={selectedPressData}
-        totalPressCount={selectedPressList.length}
+        totalPressCount={pressList.length}
         reset={reset}
       />
     </Carousel>
