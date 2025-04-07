@@ -49,17 +49,23 @@ const ListView = ({
   setCategory,
   currentPage,
   totalPressCount,
+  reset,
 }) => {
   const { logoLight, regDate, materials, name } = pressList;
 
   const mainNews = materials[0];
   const subNewsList = materials.slice(1);
 
+  function handleCategory(key) {
+    reset();
+    setCategory(key);
+  }
+
   return (
     <Container>
       <FieldTab
         category={category}
-        setCategory={setCategory}
+        handleCategory={handleCategory}
         pressLength={totalPressCount}
         currentPressIndex={currentPage}
       />

@@ -11,16 +11,11 @@ const ListViewContainer = ({
   const [category, setCategory] = useState('generalEconomy');
 
   const selectedPressList = pressList[category];
-  const selectedPressData = pressList[category][currentPage];
+  const selectedPressData = selectedPressList[currentPage];
 
   useEffect(() => {
     setTotalPage(selectedPressList.length - 1);
-  });
-
-  useEffect(() => {
-    console.log('리셋됨');
-    reset();
-  }, [category]);
+  }, [category, selectedPressList, setTotalPage]);
 
   return (
     <ListView
@@ -29,6 +24,7 @@ const ListViewContainer = ({
       currentPage={currentPage}
       data={selectedPressData}
       totalPressCount={selectedPressList.length}
+      reset={reset}
     />
   );
 };
