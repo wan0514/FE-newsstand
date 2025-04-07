@@ -43,7 +43,7 @@ function TabButton({ label, isActive, onClick, count }) {
 
 export default function FieldTab({
   category,
-  setCategory,
+  handleCategory,
   pressLength,
   currentPressIndex,
 }) {
@@ -65,7 +65,7 @@ export default function FieldTab({
         <TabButton
           key={key}
           label={label}
-          onClick={() => setCategory(key)}
+          onClick={() => handleCategory(key)}
           isActive={category === key}
           count={countLabel}
         />
