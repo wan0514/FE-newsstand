@@ -50,6 +50,7 @@ const ListView = ({
   currentPage,
   totalPressCount,
   reset,
+  progress,
 }) => {
   const { logoLight, regDate, materials, name } = pressData;
 
@@ -68,6 +69,7 @@ const ListView = ({
         handleCategory={handleCategory}
         totalPressCount={totalPressCount}
         currentPressIndex={currentPage}
+        progress={progress}
       />
       <PressNews>
         <PressInfo logoUrl={logoLight} editedTime={regDate} />

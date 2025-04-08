@@ -10,6 +10,7 @@ const ListViewContainer = ({ data }) => {
   const [totalPage, setTotalPage] = useState(0);
   const { currentPage, goNext, goPrev, reset } = useCarousel();
   const [currentCategory, setCurrentCategory] = useState('generalEconomy');
+  const [progress, setProgress] = useState(0);
 
   const pressList = data[currentCategory];
   const selectedPressData = pressList[currentPage];
@@ -58,12 +59,29 @@ const ListViewContainer = ({ data }) => {
   }, [currentCategory]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const pageChangeInterval = setInterval(() => {
+      console.log('실행됨');
       goToNextPage();
-    }, 20000);
+    }, 20000); // 20초마다 페이지 변경
+
+    return () => clearInterval(pageChangeInterval);
+  }, [currentPage, totalPage, currentCategory]);
+
+  useEffect(() => {
+    setProgress(0);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval); // 100%에 도달하면 interval을 종료합니다.
+          return 100;
+        }
+        return prev + 0.5;
+      });
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [currentPage, totalPage, currentCategory]);
+  }, [currentPage]);
 
   return (
     <Carousel goPrev={goToPrevPage} goNext={goToNextPage}>
@@ -74,6 +92,7 @@ const ListViewContainer = ({ data }) => {
         data={selectedPressData}
         totalPressCount={pressList.length}
         reset={reset}
+        progress={progress}
       />
     </Carousel>
   );
