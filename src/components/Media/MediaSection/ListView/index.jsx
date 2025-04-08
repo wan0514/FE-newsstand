@@ -59,29 +59,31 @@ const ListViewContainer = ({ data }) => {
   }, [currentCategory]);
 
   useEffect(() => {
+    // 초기화: 프로그레스바 초기화
+    setProgress(0);
+
+    // 20초마다 페이지 변경
     const pageChangeInterval = setInterval(() => {
       console.log('실행됨');
       goToNextPage();
-    }, 20000); // 20초마다 페이지 변경
+    }, 20000);
 
-    return () => clearInterval(pageChangeInterval);
-  }, [currentPage, totalPage, currentCategory]);
-
-  useEffect(() => {
-    setProgress(0);
-
-    const interval = setInterval(() => {
+    // 프로그레스바 업데이트
+    const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval); // 100%에 도달하면 interval을 종료합니다.
+          clearInterval(progressInterval);
           return 100;
         }
-        return prev + 0.5;
+        return prev + 0.5; // 진행률
       });
-    }, 100);
+    }, 100); // 100ms마다 진행률 업데이트
 
-    return () => clearInterval(interval);
-  }, [currentPage]);
+    return () => {
+      clearInterval(pageChangeInterval);
+      clearInterval(progressInterval);
+    };
+  }, [currentPage, totalPage, currentCategory]);
 
   return (
     <Carousel goPrev={goToPrevPage} goNext={goToNextPage}>
