@@ -11,6 +11,10 @@ const MediaContainer = styled.div`
   gap: 24px;
 `;
 
+const ITEMS_PER_PAGE = 24;
+const MAX_PAGE = 4;
+const LIMIT = ITEMS_PER_PAGE * MAX_PAGE;
+
 const Media = () => {
   const [gridData, setGridData] = useState([]);
   const [listData, setListData] = useState([]);
@@ -20,7 +24,9 @@ const Media = () => {
 
   useEffect(() => {
     Promise.all([
-      fetch('/mockData/pressList.json').then((res) => res.json()),
+      fetch(`http://localhost:5173/news/grid?limit=${LIMIT}`).then((res) =>
+        res.json()
+      ),
       fetch('/mockData/mockData.json').then((res) => res.json()),
     ])
       .then(([grid, list]) => {
