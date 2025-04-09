@@ -27,7 +27,7 @@ const Media = () => {
       fetch(`http://localhost:5173/news/grid?limit=${LIMIT}`).then((res) =>
         res.json()
       ),
-      fetch('/mockData/mockData.json').then((res) => res.json()),
+      fetch('http://localhost:5173/news/list').then((res) => res.json()),
     ])
       .then(([grid, list]) => {
         setGridData(grid);
