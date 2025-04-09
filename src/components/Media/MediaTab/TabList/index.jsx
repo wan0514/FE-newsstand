@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import { useContext } from 'react';
+
+import { SubscribeContext } from '@/context/SubscribeContext';
 
 import TabItem from './TabItem';
 
@@ -8,6 +11,8 @@ const StyledTabList = styled.div`
 `;
 
 const TabList = ({ activeTab, setActiveTab }) => {
+  const { subscribedPress } = useContext(SubscribeContext);
+
   return (
     <StyledTabList>
       <TabItem
@@ -19,7 +24,7 @@ const TabList = ({ activeTab, setActiveTab }) => {
         isActive={activeTab === 'subscribed'}
         onClick={() => setActiveTab('subscribed')}
         tabType="subscribed"
-        badgeLabel={0}
+        badgeLabel={subscribedPress.length}
       />
     </StyledTabList>
   );
