@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useState, useEffect } from 'react';
 
+import { SubscribeProvider } from '@/context/SubscribeContext';
+
 import MediaSection from './MediaSection';
 import MediaTab from './MediaTab';
 
@@ -45,18 +47,20 @@ const Media = () => {
   }
 
   return (
-    <MediaContainer>
-      <MediaTab
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        viewType={viewType}
-        setViewType={setViewType}
-      />
-      <MediaSection
-        viewType={viewType}
-        data={viewType === 'grid' ? gridData : listData}
-      />
-    </MediaContainer>
+    <SubscribeProvider>
+      <MediaContainer>
+        <MediaTab
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          viewType={viewType}
+          setViewType={setViewType}
+        />
+        <MediaSection
+          viewType={viewType}
+          data={viewType === 'grid' ? gridData : listData}
+        />
+      </MediaContainer>
+    </SubscribeProvider>
   );
 };
 
