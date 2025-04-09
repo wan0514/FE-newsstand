@@ -6,6 +6,8 @@ import ListView from './ListView';
 import Carousel from '../Carousel';
 import useCarousel from '../Carousel/useCarousel';
 
+const DURATION = 20000; // 20초
+
 const ListViewContainer = ({ data }) => {
   const [totalPage, setTotalPage] = useState(0);
   const { currentPage, goNext, goPrev, reset } = useCarousel();
@@ -66,7 +68,7 @@ const ListViewContainer = ({ data }) => {
     const pageChangeInterval = setInterval(() => {
       console.log('실행됨');
       goToNextPage();
-    }, 20000);
+    }, DURATION);
 
     // 프로그레스바 업데이트
     const progressInterval = setInterval(() => {
@@ -75,7 +77,7 @@ const ListViewContainer = ({ data }) => {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 0.5; // 진행률
+        return prev + 100 / (DURATION / 100);
       });
     }, 100); // 100ms마다 진행률 업데이트
 
