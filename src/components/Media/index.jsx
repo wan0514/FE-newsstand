@@ -18,7 +18,7 @@ const LIMIT = ITEMS_PER_PAGE * MAX_PAGE;
 const Media = () => {
   const [gridData, setGridData] = useState([]);
   const [listData, setListData] = useState([]);
-  const [tabType, setTabType] = useState('all');
+  const [activeTab, setActiveTab] = useState('all');
   const [viewType, setViewType] = useState('grid');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,8 +47,8 @@ const Media = () => {
   return (
     <MediaContainer>
       <MediaTab
-        tabType={tabType}
-        setTabType={setTabType}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         viewType={viewType}
         setViewType={setViewType}
       />
