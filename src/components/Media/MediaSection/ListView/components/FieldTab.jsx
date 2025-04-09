@@ -8,7 +8,6 @@ import ProgressBar from './ProgressBar';
 const StyledFieldTab = styled.div`
   display: flex;
   height: 40px;
-  border: 1px solid ${({ theme }) => theme.colors.border.default};
   background-color: ${({ theme }) => theme.colors.surface.alt};
 `;
 
