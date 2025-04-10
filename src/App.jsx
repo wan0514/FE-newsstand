@@ -32,9 +32,9 @@ function App() {
       </StackLayout>
       {isModalOpen && (
         <Modal
-          mediaName={targetItem}
+          targetName={targetItem}
           isModalOpen={isModalOpen}
-          handleClose={handleClose}
+          onModalClose={handleClose}
         />
       )}
     </ThemeProvider>
