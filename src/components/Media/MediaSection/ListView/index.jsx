@@ -6,7 +6,9 @@ import ListView from './ListView';
 import Carousel from '../Carousel';
 import useCarousel from '../Carousel/useCarousel';
 
-const DURATION = 20000; // 20초
+const DURATION = 20000;
+const INTERVAL_DURATION = 100;
+const PROGRESS_INCREMENT = 100;
 
 const ListViewContainer = ({ data }) => {
   const [totalPage, setTotalPage] = useState(0);
@@ -30,30 +32,31 @@ const ListViewContainer = ({ data }) => {
   );
 
   function goToPrevPage() {
-    if (currentPage === 0) {
-      const prevIndex = getCurrentCategoryIndex(-1);
-      const previousCategory = fieldMap[prevIndex].key;
-
-      // 카테고리 변경 전에 이전 카테고리의 총 페이지 수를 계산 : currentCategory 상태는 이전값.
-      const prevCategoryTotalPage = data[previousCategory].length - 1;
-
-      setCurrentCategory(previousCategory);
-      reset(prevCategoryTotalPage);
-    } else {
+    if (currentPage !== 0) {
       goPrev();
+      return;
     }
+    const prevIndex = getCurrentCategoryIndex(-1);
+    const previousCategory = fieldMap[prevIndex].key;
+
+    // 카테고리 변경 전에 이전 카테고리의 총 페이지 수를 계산 : currentCategory 상태는 이전값.
+    const prevCategoryTotalPage = data[previousCategory].length - 1;
+
+    setCurrentCategory(previousCategory);
+    reset(prevCategoryTotalPage);
   }
 
   function goToNextPage() {
-    if (currentPage === totalPage) {
-      const nextIndex = getCurrentCategoryIndex(1);
-      const nextCategory = fieldMap[nextIndex].key;
-
-      setCurrentCategory(nextCategory);
-      reset();
-    } else {
+    if (currentPage !== totalPage) {
       goNext();
+      return;
     }
+
+    const nextIndex = getCurrentCategoryIndex(1);
+    const nextCategory = fieldMap[nextIndex].key;
+
+    setCurrentCategory(nextCategory);
+    reset();
   }
 
   useEffect(() => {
@@ -73,17 +76,16 @@ const ListViewContainer = ({ data }) => {
     // 프로그레스바 업데이트
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        if (prev >= PROGRESS_INCREMENT) {
           clearInterval(progressInterval);
-          return 100;
+          return PROGRESS_INCREMENT;
         }
-        return prev + 100 / (DURATION / 100);
+        return prev + PROGRESS_INCREMENT / (DURATION / INTERVAL_DURATION);
       });
-    }, 100); // 100ms마다 진행률 업데이트
+    }, INTERVAL_DURATION);
 
     return () => {
-      clearInterval(pageChangeInterval);
-      clearInterval(progressInterval);
+      [pageChangeInterval, progressInterval].forEach(clearInterval);
     };
   }, [currentPage, totalPage, currentCategory]);
 
