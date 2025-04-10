@@ -19,7 +19,11 @@ export const SubscribeProvider = ({ children }) => {
 
   return (
     <SubscribeContext.Provider
-      value={{ subscribedPress, addPressSubscription, removePressSubscription }}
+      value={{
+        subscribedPress,
+        addPressSubscription,
+        removePressSubscription,
+      }}
     >
       {children}
     </SubscribeContext.Provider>

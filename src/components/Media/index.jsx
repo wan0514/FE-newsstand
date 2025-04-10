@@ -57,6 +57,7 @@ const Media = () => {
         />
         <MediaSection
           viewType={viewType}
+          activeTab={activeTab}
           data={viewType === 'grid' ? gridData : listData}
         />
       </MediaContainer>
