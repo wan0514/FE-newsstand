@@ -48,8 +48,11 @@ const GridViewContainer = ({ data: pressList, activeTab }) => {
     endIndex
   );
 
-  // 4. totalPage 계산 (동적으로)
-  const totalPage = Math.ceil(filteredPressData.length / ITEMS_PER_PAGE);
+  // 4. totalPage 계산 (동적으로, 최대 4페이지로 제한)
+  const totalPage = Math.min(
+    Math.ceil(filteredPressData.length / ITEMS_PER_PAGE),
+    MAX_PAGE
+  );
 
   // 구독 추가
   const handleAddSubscription = ({ pid: pressId }) => {
