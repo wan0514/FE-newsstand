@@ -3,9 +3,15 @@ import styled from '@emotion/styled';
 
 import Button from '@components/common/Button';
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 388px;
+`;
+
 const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
+  height: 100%;
 `;
 
 const TableRow = styled.tr``;
@@ -76,8 +82,10 @@ export default function GridView({
   });
 
   return (
-    <Table>
-      <tbody>{rows}</tbody>
-    </Table>
+    <Wrapper>
+      <Table>
+        <tbody>{rows}</tbody>
+      </Table>
+    </Wrapper>
   );
 }

@@ -12,7 +12,11 @@ const MediaSection = ({ viewType, data, activeTab }) => {
 
   const ViewComponet = getViewComponent(viewType);
 
-  return <ViewComponet data={data} activeTab={activeTab} />;
+  const viewStyles = {
+    height: '388px',
+  };
+
+  return <ViewComponet data={data} activeTab={activeTab} style={viewStyles} />;
 };
 
 export default MediaSection;
