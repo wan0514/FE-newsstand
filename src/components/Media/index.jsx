@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import { useState, useEffect } from 'react';
 
+import { ModalRenderer } from '@components/common/Modal/ModalRenderer';
+
+import { ModalProvider } from '@/context/ModalContext';
 import { SubscribeProvider } from '@/context/SubscribeContext';
 
 import MediaSection from './MediaSection';
@@ -47,21 +50,24 @@ const Media = () => {
   }
 
   return (
-    <SubscribeProvider>
-      <MediaContainer>
-        <MediaTab
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          viewType={viewType}
-          setViewType={setViewType}
-        />
-        <MediaSection
-          viewType={viewType}
-          activeTab={activeTab}
-          data={viewType === 'grid' ? gridData : listData}
-        />
-      </MediaContainer>
-    </SubscribeProvider>
+    <ModalProvider>
+      <SubscribeProvider>
+        <MediaContainer>
+          <MediaTab
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            viewType={viewType}
+            setViewType={setViewType}
+          />
+          <MediaSection
+            viewType={viewType}
+            activeTab={activeTab}
+            data={viewType === 'grid' ? gridData : listData}
+          />
+        </MediaContainer>
+      </SubscribeProvider>
+      <ModalRenderer />
+    </ModalProvider>
   );
 };
 

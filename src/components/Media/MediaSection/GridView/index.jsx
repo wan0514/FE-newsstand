@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
-import ConfirmModal from '@components/common/Modal';
-
+import { useModal } from '@/components/common/Modal/useModal';
 import { SubscribeContext } from '@/context/SubscribeContext';
 import {
   getPressDataWithSubscription,
@@ -17,19 +16,16 @@ const GridViewContainer = ({ data: pressList, activeTab }) => {
   const { currentPage, goNext, goPrev, reset } = useCarousel();
   const { subscribedPress, addPressSubscription, removePressSubscription } =
     useContext(SubscribeContext);
+  const { openModal } = useModal();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [pressIdToRemove, setPressIdToRemove] = useState(null);
-
-  const [targetPressName, setTargetPressName] = useState('null');
-
+  // 페이지네이션 관련 상수
   const ITEMS_PER_PAGE = 24;
   const MAX_PAGE = 4;
 
   const startIndex = currentPage * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
-  // 1. pressDataWithSubscription 준비
+  // 1. 구독여부 넣어서 데이터 생성
   const pressDataWithSubscription = getPressDataWithSubscription(
     pressList,
     subscribedPress
@@ -61,47 +57,29 @@ const GridViewContainer = ({ data: pressList, activeTab }) => {
 
   // 구독 해지
   const handleRemoveSubscription = ({ pid: pressId, name }) => {
-    setPressIdToRemove(pressId); // 해지할 press id 저장
-    setTargetPressName(name);
-    setIsModalOpen(true); // 모달 열기
-  };
-
-  // 모달에서 해지 확인 시
-  const confirmRemoveSubscription = () => {
-    removePressSubscription(pressIdToRemove); // 구독 해지
-    setIsModalOpen(false); // 모달 닫기
-  };
-
-  // 모달에서 해지 취소 시
-  const cancelRemoveSubscription = () => {
-    setIsModalOpen(false); // 모달 닫기
+    openModal({
+      targetName: name,
+      onConfirm: () => {
+        removePressSubscription(pressId);
+      },
+    });
   };
 
   useEffect(() => reset(), [activeTab]);
 
   return (
-    <>
-      <Carousel
-        goNext={goNext}
-        goPrev={goPrev}
-        showPrev={currentPage > 0}
-        showNext={currentPage < totalPage - 1}
-      >
-        <GridView
-          data={selectedPressData}
-          handleAddSubscription={handleAddSubscription} // 구독 추가 함수 전달
-          handleRemoveSubscription={handleRemoveSubscription} // 구독 해지 함수 전달
-        />
-      </Carousel>
-      {/* 구독 해지 확인 모달 */}
-      {isModalOpen && (
-        <ConfirmModal
-          mediaName={targetPressName}
-          onConfirm={confirmRemoveSubscription} // 해지 확인
-          onModalClose={cancelRemoveSubscription} // 해지 취소
-        />
-      )}
-    </>
+    <Carousel
+      goNext={goNext}
+      goPrev={goPrev}
+      showPrev={currentPage > 0}
+      showNext={currentPage < totalPage - 1}
+    >
+      <GridView
+        data={selectedPressData}
+        handleAddSubscription={handleAddSubscription}
+        handleRemoveSubscription={handleRemoveSubscription}
+      />
+    </Carousel>
   );
 };
 
