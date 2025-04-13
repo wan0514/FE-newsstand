@@ -32,7 +32,7 @@
 | 프레임워크 | React, Vite |
 | 상태 관리 | Context API |
 | 스타일링 | Emotion |
-| 협업 도구 | Trello, Notion |
+| 스케쥴링 및 기록용 도구 | Trello, Notion |
 | 기타 | ESLint, Prettier |
 
 ---
